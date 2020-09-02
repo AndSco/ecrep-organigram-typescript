@@ -1,0 +1,13 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.cloudinarySecret = exports.cloudinaryKey = exports.cloudName = exports.readerPassword = exports.adminPassword = exports.mongoDevelopmentConnection = exports.mongoProductionConnection = void 0;
+const path_1 = require("path");
+const dotenv_1 = require("dotenv");
+dotenv_1.config({ path: path_1.resolve(__dirname, "../.env") });
+exports.mongoProductionConnection = process.env.MONGO_CONNECTION;
+exports.mongoDevelopmentConnection = process.env.MONGO_DEVELOPMENT;
+exports.adminPassword = process.env.ADMIN_LOGIN;
+exports.readerPassword = process.env.READER_LOGIN;
+exports.cloudName = process.env.CLOUD_NAME;
+exports.cloudinaryKey = process.env.CLOUDINARY_KEY;
+exports.cloudinarySecret = process.env.CLOUDINARY_SECRET;

@@ -1,0 +1,47 @@
+@font-face {
+  font-family: "EC Square sans pro";
+  src: url("./fonts/ECSquareSansPro-Regular.otf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EC Square sans pro light";
+  src: url("./fonts/ECSquareSansPro-Light.otf");
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EC Square sans pro medium";
+  src: url("./fonts/ECSquareSansPro-Medium.otf");
+  font-style: normal;
+}
+
+body {
+  margin: 0;
+  font-family: "EC Square sans pro";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  box-sizing: border-box;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+
+h4,
+p {
+  margin: 0;
+}
+
+button {
+  border: none;
+}
+
+input {
+  border: none;
+}
+
+.dragging {
+  opacity: 0.4;
+}
