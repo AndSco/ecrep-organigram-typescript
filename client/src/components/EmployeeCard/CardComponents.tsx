@@ -7,6 +7,8 @@ import { officePhoneBase } from "../../constants/contacts";
 import { TeamInterface } from "../../models/TeamInterface";
 import { setTeamColor } from "../../utils/functions";
 import { breakpoints } from "../../constants/breakpoints";
+import { darkGrey, mediumGrey } from "../../constants/colors";
+import { PaddedIcon } from "../UI/PaddedIcon";
 
 interface iContainerProps {
   team: TeamInterface;
@@ -63,7 +65,7 @@ export const LeftSide = styled.div`
 
 export const ProfilePic = styled.div`
   border-radius: 50%;
-  margin-bottom: 1em;
+  margin-bottom: 30px;
   width: 85px;
   height: 85px;
   background-size: cover;
@@ -116,18 +118,30 @@ const ContactDetail: React.FC<iContactDetailProps> = ({
 }) => {
   return (
     <span>
-      <FontAwesomeIcon icon={icon} />
+      <FontAwesomeIcon
+        icon={icon}
+        color={mediumGrey}
+        style={{ paddingRight: 6 }}
+      />
       <a href={hyperLink}>{text}</a>
     </span>
   );
 };
+
+const Designation = styled.h4`
+  letter-spacing: 0.7px;
+  font-size: 0.9em;
+  color: ${darkGrey};
+  padding-bottom: 10px;
+  font-weight: 600;
+`;
 
 export const Details: React.FC<{ staffMember: TeamMember }> = ({
   staffMember
 }) => {
   return (
     <DetailsContainer>
-      <h4 style={{ letterSpacing: 0.7 }}>{staffMember.designation}</h4>
+      <Designation>{staffMember.designation}</Designation>
       <p style={{ paddingBottom: "1.1em" }}>
         <em>
           {staffMember.firstName + " " + staffMember.lastName.toUpperCase()}

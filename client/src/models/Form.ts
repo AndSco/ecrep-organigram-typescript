@@ -1,4 +1,5 @@
 import { TeamMember } from "../models/TeamMember";
+import { defaultProfilePicPath } from "../constants/apiUrls";
 
 export type FormAction = "ADD" | "EDIT";
 
@@ -36,6 +37,5 @@ export const emptyForm = {
   mobile: "",
   email: "",
   team: "",
-  imageUrl:
-    "https://res.cloudinary.com/dnvvg886r/image/upload/v1598536472/organigram/dummy-profile_ivzn1r.png"
+  imageUrl: defaultProfilePicPath
 };

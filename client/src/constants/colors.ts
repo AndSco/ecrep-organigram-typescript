@@ -10,4 +10,5 @@ export const teamColors = [
 export const borderYellow = "#f4d03f";
 export const lightGrey = "#c4c4c4";
 export const mediumGrey = "#655f62";
-export const darkGrey = "#2e1f27";
+export const darkGrey = "#404243";
+//"#2e1f27";

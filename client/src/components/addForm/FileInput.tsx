@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Container } from "./TextInput";
 import { LoadingContext } from "../../contexts/loading/LoadingContext";
 import { mediumGrey, teamColors, lightGrey } from "../../constants/colors";
 import { FormContext } from "../../contexts/form/FormContext";
-import { apiUrls } from "../../constants/apiUrls";
+import { apiUrls, defaultProfilePicPath } from "../../constants/apiUrls";
 import axios from "axios";
 import { PaddedIcon } from "../UI/PaddedIcon";
 import { breakpoints } from "../../constants/breakpoints";
@@ -66,20 +66,22 @@ const EditPicContainer = styled.div`
 `;
 
 export const FileInput: React.FC = () => {
-  const { updateForm, userToEdit } = useContext(FormContext);
+  const { updateForm, userToEdit, inputValues } = useContext(FormContext);
   const { startLoading, stopLoading } = useContext(LoadingContext);
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [needChangeImage, setNeedChangeImage] = useState(false);
+  const [imageUploaded, setImageUploaded] = useState<null | string>(null);
+
+  const signalPicHasUploaded = (urlReceived: string) => {
+    setImageUploaded(urlReceived);
+  };
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileUploaded = e.target.files?.[0] as File;
     setImageFile(fileUploaded);
     uploadPicture(fileUploaded);
+    setNeedChangeImage(true);
   };
-
-  useEffect(() => {
-    console.log("IMAGE FILE", imageFile);
-  }, [imageFile]);
 
   const uploadPicture = async (imageFile: File) => {
     startLoading();
@@ -88,13 +90,17 @@ export const FileInput: React.FC = () => {
     const { data: url } = await axios.post(apiUrls.images, fd);
     console.log("URL", url);
     updateForm({ type: "imageUrl", payload: url });
+    signalPicHasUploaded(url);
     stopLoading();
   };
 
-  return userToEdit && !needChangeImage ? (
+  return (userToEdit && !needChangeImage) ||
+    inputValues.imageUrl !== defaultProfilePicPath ? (
     <Container>
       <EditPicContainer onClick={() => setNeedChangeImage(true)}>
-        <ProfilePic imageUrl={userToEdit.imageUrl} />
+        <ProfilePic
+          imageUrl={userToEdit ? userToEdit.imageUrl : inputValues.imageUrl}
+        />
         <p>Click to change picture</p>
       </EditPicContainer>
     </Container>

@@ -98,7 +98,6 @@ export const Card: React.FC<{ staffMember: TeamMember }> = ({
         )}
       </LeftSide>
       <Details staffMember={staffMember} />
-      {/* <p>{staffMember.indexInTeam}</p> */}
     </Container>
   );
 };

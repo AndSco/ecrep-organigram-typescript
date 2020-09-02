@@ -19,9 +19,9 @@ app.use("/api/images", image_1.default);
 dbConnection_1.connectToDatabase();
 // To serve both frontend and backend - catch ALL. Serve static assets only if in production.
 if (process.env.NODE_ENV === "production") {
-    app.use(express_1.default.static(path_1.default.join(__dirname, "client", "build")));
+    app.use(express_1.default.static(path_1.default.join(__dirname, "/../client", "build")));
     app.get("*", (req, res) => {
-        res.sendFile(path_1.default.join(__dirname, "client", "build", "index.html"));
+        res.sendFile(path_1.default.join(__dirname, "/../client", "build", "index.html"));
     });
 }
 app.use((error, req, res, next) => {
