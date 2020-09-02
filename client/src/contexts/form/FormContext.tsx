@@ -67,6 +67,7 @@ export const FormContextProvider: React.FC = ({ children }) => {
 
   const resetForm = () => {
     setUserToEdit(undefined);
+    setFormAction("ADD");
     dispatch({ type: "resetForm" });
   };
 

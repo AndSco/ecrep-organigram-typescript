@@ -4,6 +4,8 @@ import { LoginContext } from "../contexts/login/Login";
 import logo from "../images/logo.jpg";
 import { login } from "../utils/dbFunctions";
 import { Role } from "../models/AuthRole";
+import { breakpoints } from "../constants/breakpoints";
+import { redError } from "../constants/colors";
 
 const RoundLogoContainer = styled.div`
   width: 90px;
@@ -42,6 +44,7 @@ const StyledLogin = styled.div`
     align-items: center;
     width: 40vw;
     min-width: 350px;
+    margin-top: 1.5em;
   }
 
   input {
@@ -60,8 +63,14 @@ const StyledLogin = styled.div`
   }
 
   .error {
-    color: #ff4646;
+    color: ${redError};
     padding: 1em;
+  }
+
+  @media (max-width: ${breakpoints.smallScreens}px) {
+    input {
+      height: 50px;
+    }
   }
 `;
 
@@ -94,7 +103,6 @@ export const Login: React.FC = () => {
       <RoundLogoContainer>
         <img src={logo} alt="EC Rep logo" />
       </RoundLogoContainer>
-      <h3>ENTER PASSWORD TO ACCESS</h3>
       <form onSubmit={e => handleSubmit(e)}>
         <input
           type="password"
