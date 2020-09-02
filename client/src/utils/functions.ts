@@ -79,49 +79,43 @@ export const setFormLabel = (inputName: InputName) => {
 
 // SAVE as PFD - onclick, I add a class changing size to A2, removed after the PDF has been saved
 export const savePdf = async function() {
-  const toPrint = document.querySelector(".App") as HTMLDivElement;
-  // toPrint.className += " to-print";
+  try {
+    const toPrint = document.querySelector(".App") as HTMLDivElement;
+    // toPrint.className += " to-print";
 
-  const iconsContainer = document.getElementById(
-    "icons-container"
-  ) as HTMLDivElement;
-  iconsContainer.style.display = "none";
+    const iconsContainer = document.getElementById(
+      "icons-container"
+    ) as HTMLDivElement;
+    iconsContainer.style.display = "none";
 
-  const employees = document.querySelectorAll(".employee") as NodeListOf<
-    HTMLDivElement
-  >;
+    const employees = document.querySelectorAll(".employee") as NodeListOf<
+      HTMLDivElement
+    >;
 
-  employees.forEach(div => {
-    div.style.boxShadow = "none";
-    // div.style.maxWidth = "400px";
-    div.style.padding = "15px 25px";
-  });
-
-  const teams = document.querySelectorAll(".teams") as NodeListOf<
-    HTMLDivElement
-  >;
-  teams.forEach(div => {
-    // div.style.transform = "scale(1.06)";
-  });
-
-  html2canvas(toPrint, { useCORS: true }) // to allow saving external images!
-    .then(canvas => {
-      const imgData = canvas.toDataURL("image/png");
-
-      // This downloads the image
-      // const a = document.createElement("a");
-      // a.href = canvas
-      //   .toDataURL("image/jpeg")
-      //   .replace("image/jpeg", "image/octet-stream");
-      // a.download = "test.jpg";
-      // a.click();
-
-      //////
-      const pdf = new jsPdf("p", "mm", "a2");
-      pdf.addImage(imgData, "PNG", 0, 0, 420, 594);
-      pdf.save("EC_Rep_organigram.pdf");
-    })
-    .then(() => {
-      iconsContainer.style.display = "flex";
+    employees.forEach(div => {
+      div.style.boxShadow = "none";
+      div.style.padding = "15px 25px";
     });
+
+    // const teams = document.querySelectorAll(".teams") as NodeListOf<
+    //   HTMLDivElement
+    // >;
+    // teams.forEach(div => {
+    //   // div.style.transform = "scale(1.06)";
+    // });
+
+    await html2canvas(toPrint, { useCORS: true }) // to allow saving external images!
+      .then(canvas => {
+        const imgData = canvas.toDataURL("image/png");
+        const pdf = new jsPdf("p", "mm", "a2");
+        pdf.addImage(imgData, "PNG", 0, 0, 420, 594);
+        pdf.save("EC_Rep_organigram.pdf");
+      })
+      .then(() => {
+        iconsContainer.style.display = "flex";
+        return;
+      });
+  } catch (err) {
+    console.error(err);
+  }
 };
