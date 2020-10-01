@@ -1,31 +1,6 @@
-Typescript App on Heroku
-========================
+Organigram generator
+=====================
 
-This is a simple Node.js + Express application written in Typescript
-that can be built and run on Heroku.
+Node.js + Express + React application written in Typescript. 
 
-## Deploy
-To deploy this application simply create a new Heroku app
-
-```
-heroku create
-```
-
-and then just push the sources to Heroku
-
-```
-git push heroku master
-```
-
-Heroku will download all necessary libraries and fire the web
-process defined in [Procfile](Procfile) that will build and start
-the application.
-
-## How this works
-
-Typically you will add typescript as a devDependency to your package.json.
-But this won't work on Heroku since those dependencies are not downloaded
-(due to `NODE_ENV` being set to `production`).
-
-In order to go around this issue you just simply need to add typescript
-as a regular dependency and build the project after each push.
+Staff changes happen all the time... Instead of designing a new diagram every time a new intern joins the organisation, this web application allows the staff of the European Commission Representation in Malta to create, update and save the organisation’s organigram as a PDF in a few clicks. It also serves as a contacts’ directory to call or email colleagues with just one tap
