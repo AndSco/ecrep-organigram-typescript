@@ -8,7 +8,6 @@ import { TeamInterface } from "../../models/TeamInterface";
 import { setTeamColor } from "../../utils/functions";
 import { breakpoints } from "../../constants/breakpoints";
 import { darkGrey, mediumGrey } from "../../constants/colors";
-import { PaddedIcon } from "../UI/PaddedIcon";
 
 interface iContainerProps {
   team: TeamInterface;

@@ -4,7 +4,6 @@ import { apiUrls } from "../constants/apiUrls";
 import { TeamInterface } from "../models/TeamInterface";
 import arrayMove from "array-move";
 import { TeamMember } from "../models/TeamMember";
-import { Role } from "../models/AuthRole";
 
 export const getTeamSize = async (teamName: TeamInterface): Promise<any> => {
   try {

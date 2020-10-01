@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useCallback } from "react";
 import { StaffContext, iStaffContext } from "./StaffContext";
 import { TeamMember } from "../../models/TeamMember";
-import { FormContext } from "../form/FormContext";
 import { LoadingContext } from "../loading/LoadingContext";
 import axios from "axios";
 import { ErrorContext } from "../error/error";
@@ -17,11 +16,7 @@ export const StaffContextProvider: React.FC = ({ children }) => {
 
   const refreshStaffMembers = () => setRefreshSwitch(prevState => !prevState);
 
-  useEffect(() => {
-    console.log("refreshSwitch", refreshSwitch);
-  }, [refreshSwitch]);
-
-  const uploadStaffMembers = () => {
+  const uploadStaffMembers = useCallback(() => {
     startLoading();
     axios
       .get(apiUrls.employees)
@@ -33,15 +28,11 @@ export const StaffContextProvider: React.FC = ({ children }) => {
       .catch(err => {
         addError("Something is wrong with your connection. Try again later");
       });
-  };
-
-  useEffect(() => {
-    console.log("STAFF MEMBERS", staffMembers);
-  }, [staffMembers]);
+  }, []);
 
   useEffect(() => {
     uploadStaffMembers();
-  }, [refreshSwitch]);
+  }, [refreshSwitch, uploadStaffMembers]);
 
   const valuesToPass: iStaffContext = {
     staffMembers,

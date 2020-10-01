@@ -1,4 +1,4 @@
-import React, { createContext, useState, useReducer, useEffect } from "react";
+import React, { createContext, useState, useReducer } from "react";
 import {
   FormInputs,
   FormAction,
@@ -89,21 +89,3 @@ export const FormContextProvider: React.FC = ({ children }) => {
     </FormContext.Provider>
   );
 };
-
-// const startingState =
-// userToEdit === undefined
-//   ? emptyForm
-//   : {
-//       designation: userToEdit.designation,
-//       firstName: userToEdit.firstName,
-//       lastName: userToEdit.lastName,
-//       officePhone: userToEdit.officePhone ?? "",
-//       mobile: userToEdit.mobile ?? "",
-//       email: userToEdit.email,
-//       team: userToEdit.team,
-//       imageUrl: userToEdit.imageUrl
-//     };
-
-// useEffect(() => console.log("Starting state", startingState), [
-//   startingState
-// ]);

@@ -68,17 +68,10 @@ const EditPicContainer = styled.div`
 export const FileInput: React.FC = () => {
   const { updateForm, userToEdit, inputValues } = useContext(FormContext);
   const { startLoading, stopLoading } = useContext(LoadingContext);
-  const [imageFile, setImageFile] = useState<File | null>(null);
   const [needChangeImage, setNeedChangeImage] = useState(false);
-  const [imageUploaded, setImageUploaded] = useState<null | string>(null);
-
-  const signalPicHasUploaded = (urlReceived: string) => {
-    setImageUploaded(urlReceived);
-  };
 
   const fileChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fileUploaded = e.target.files?.[0] as File;
-    setImageFile(fileUploaded);
     uploadPicture(fileUploaded);
     setNeedChangeImage(true);
   };
@@ -88,16 +81,19 @@ export const FileInput: React.FC = () => {
     const fd = new FormData();
     fd.append("image", imageFile, imageFile.name);
     const { data: url } = await axios.post(apiUrls.images, fd);
-    console.log("URL", url);
     updateForm({ type: "imageUrl", payload: url });
-    signalPicHasUploaded(url);
     stopLoading();
   };
 
   return (userToEdit && !needChangeImage) ||
     inputValues.imageUrl !== defaultProfilePicPath ? (
     <Container>
-      <EditPicContainer onClick={() => setNeedChangeImage(true)}>
+      <EditPicContainer
+        onClick={() => {
+          setNeedChangeImage(true);
+          updateForm({ type: "imageUrl", payload: defaultProfilePicPath });
+        }}
+      >
         <ProfilePic
           imageUrl={userToEdit ? userToEdit.imageUrl : inputValues.imageUrl}
         />

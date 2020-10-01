@@ -80,7 +80,7 @@ const ContactDetail: React.FC<iContactDetail> = ({
       {isInPrintMode ? textForPrint : <FontAwesomeIcon icon={iconType} />}
       {text}
       {linkUrl && (
-        <a href={linkUrl} target="_blank">
+        <a href={linkUrl} target="_blank" rel="noopener noreferrer">
           {linkText}
         </a>
       )}
@@ -89,7 +89,6 @@ const ContactDetail: React.FC<iContactDetail> = ({
 };
 
 export const ContactsBox = () => {
-  const { isInPrintMode } = useContext(PrintModeContext);
   return (
     <ContactsBoxContainer>
       <h2>Representation's contact details</h2>

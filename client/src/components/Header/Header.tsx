@@ -27,9 +27,7 @@ const HeaderStyled = styled.header`
 
 export const Header = () => {
   const { show: showForm, isVisible: isFormVisible } = useContext(FormContext);
-  const { enterPrintMode, exitPrintMode, isInPrintMode } = useContext(
-    PrintModeContext
-  );
+  const { enterPrintMode, exitPrintMode } = useContext(PrintModeContext);
   const { startLoading, stopLoading } = useContext(LoadingContext);
   const { authRole, logout } = useContext(LoginContext);
   const { mobile } = useDeviceDetect();
